@@ -11,7 +11,17 @@
         <x:String x:Key="AppName">Save the Humans</x:String>
         <ControlTemplate x:Key="EnemyTemplate" TargetType="ContentControl">
             <Grid>
-                <Ellipse Height="100" Width="100" Fill="Red"/>
+                <Ellipse Height="100" Width="75" Fill="Red" Stroke="Black"/>
+                <Ellipse HorizontalAlignment="Center" Height="36" Fill="Black" Margin="40,20,70,0" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.5,0.5">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform SkewX="10"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse HorizontalAlignment="Center" Height="35" Margin="70,20,40,-2" VerticalAlignment="Top" Width="25" Fill="Black" RenderTransformOrigin="0.5,0.5">
+                    <Ellipse.RenderTransform>
+                        <CompositeTransform SkewX="-10"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
             </Grid>
         </ControlTemplate>
     </Page.Resources>
@@ -48,19 +58,19 @@
             <TextBlock Text="Avoid These" TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}"/>
             <ContentControl Template="{StaticResource EnemyTemplate}" Content="ContentControl" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </StackPanel>
-        <Canvas x:Name="playArea" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
+        <Canvas x:Name="playArea" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Grid.ColumnSpan="3" PointerMoved="PlayArea_PointerMoved" PointerExited="PlayArea_PointerExited">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
                     <GradientStop Color="#FFA540EE" Offset="1"/>
                 </LinearGradientBrush>
             </Canvas.Background>
-            <StackPanel x:Name="human" HorizontalAlignment="Stretch" Orientation="Vertical">
+            <StackPanel x:Name="human" HorizontalAlignment="Stretch" Orientation="Vertical" PointerPressed="Human_PointerPressed">
                 <Ellipse Height="10" Width="10" Fill="White"/>
                 <Rectangle Height="25" Width="10" Fill="White" />
             </StackPanel>
             <TextBlock x:Name="gameOverText" Canvas.Left="469" Canvas.Top="289" Text="Game Over" TextWrapping="Wrap" FontFamily="Arial Black" FontSize="100" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <Rectangle HorizontalAlignment="Stretch" Height="50" Canvas.Left="1182" Canvas.Top="139" VerticalAlignment="Stretch" Width="50">
+            <Rectangle x:Name="target" HorizontalAlignment="Stretch" Height="50" Canvas.Left="1182" Canvas.Top="139" VerticalAlignment="Stretch" Width="50" PointerEntered="Target_PointerEntered">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
